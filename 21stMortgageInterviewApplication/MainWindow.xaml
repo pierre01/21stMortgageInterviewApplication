@@ -4,9 +4,82 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_21stMortgageInterviewApplication"
+        xmlns:viewModels="clr-namespace:_21stMortgageInterviewApplication.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel,
+                                     IsDesignTimeCreatable=true}">
+        <Window.Resources>
+        <Style x:Key="ResultStyle" TargetType="TextBox">
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsPositive, Mode=OneWay}" Value="True">
+                    <Setter Property="Background" Value="Green" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsPositive, Mode=OneWay}" Value="False">
+                    <Setter Property="Background" Value="Red" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <StackPanel Margin="16">
+        <StackPanel Orientation="Horizontal">
+            <Label
+                Width="80"
+                Margin="0,0,8,0"
+                HorizontalAlignment="Right"
+                TabIndex="1"
+                Target="{Binding ElementName=InputText}">
+                User _Input
+            </Label>
+            <TextBox
+                x:Name="InputText"
+                Width="250"
+                TabIndex="2"
+                Text="{Binding UserInput, Mode=TwoWay}" />
+        </StackPanel>
 
-    </Grid>
+        <StackPanel Margin="0,8,0,0" Orientation="Horizontal">
+            <Button
+                Width="180"
+                Height="40"
+                Margin="8"
+                Command="{Binding FindLargestNumberCommand}"
+                Content="Find _Largest Number"
+                TabIndex="3" />
+            <Button
+                Width="180"
+                Height="40"
+                Margin="8"
+                Command="{Binding FindOddSumCommand}"
+                Content="Find _Odd Sum"
+                TabIndex="4" />
+            <Button
+                Width="180"
+                Height="40"
+                Margin="8"
+                Command="{Binding FindEvenSumCommand}"
+                Content="Find _Even Sum"
+                TabIndex="5" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label
+                Width="80"
+                Margin="0,0,8,0"
+                HorizontalAlignment="Right"
+                TabIndex="6"
+                Target="{Binding ElementName=ResultTextBox}">
+                _Result
+            </Label>
+            <TextBox
+                x:Name="ResultTextBox"
+                Width="100"
+                Style="{StaticResource ResultStyle}"
+                TabIndex="7"
+                Text="{Binding Result, Mode=OneWay}" />
+        </StackPanel>
+
+    </StackPanel>
 </Window>
