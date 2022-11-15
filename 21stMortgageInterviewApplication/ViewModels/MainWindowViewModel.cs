@@ -41,7 +41,7 @@ namespace _21stMortgageInterviewApplication.ViewModels
             /// </summary>
             public bool CanExecuteOnList(object obj)
             {
-                // return _numbers.Count == 0; // Removed because of tabbing issue constraints
+                // return _numbers.Count > 0; // Removed because of tabbing issue constraints
                 return true;
             }
 
